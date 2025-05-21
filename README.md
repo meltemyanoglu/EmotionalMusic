@@ -47,12 +47,19 @@ You must manually download the dataset from the [official DEAM site](http://cvml
 - Analyzes the emotional distribution of the dataset.
 - Processes and segments audio files into chunks (e.g., 5 and 10 seconds).
 - Visualizes sample segments and analysis results.
+- - Saves:
+  - `.wav` audio chunks
+  - `.json` metadata
+  - `valence-arousal` visualizations
 
 *Run this notebook first to generate processed data for downstream tasks.*
 
 ### 2. Latent Representations Creation (create_latent_representations.ipynb)
 - Uses the preprocessed data.
 - Leverages an EnCodec model to produce latent representations of audio segments.
+- - Saves:
+  - `.npy` latent arrays
+  - `.csv` files with corresponding emotional labels
 - Visualizes the latent space with sample plots.
 
 *Execute this notebook after preprocessing to generate and inspect latent features.*
@@ -61,6 +68,15 @@ You must manually download the dataset from the [official DEAM site](http://cvml
 - Configures training parameters (latent dimension, batch size, learning rate, etc.).
 - Loads the latent representations dataset.
 - Instantiates and trains the Emotional VAE model.
+- - Tracks:
+  - Total loss
+  - Reconstruction (MSE)
+  - KL Divergence
+- Saves:
+  - `.pt` model checkpoints
+  - Reconstruction samples
+  - Training curves
+  - Latent space visualizations
 - Visualizes training statistics such as total loss, reconstruction loss, and KL divergence.
 - Generates sample outputs from the trained model.
 
@@ -70,10 +86,48 @@ You must manually download the dataset from the [official DEAM site](http://cvml
 - Loads the trained VAE model from the checkpoint.
 - Sets up sample generation with varying emotional conditions.
 - Converts latent samples into audio signals with defined synthesis functions.
+- - Samples new music segments conditioned on emotional values.
+- Uses custom synthesis functions:
+  - `create_musical_waveform()`
+  - `create_melodic_music()`
+  - `create_piano_melody()`
+- Outputs:
+  - `.wav` generated audio
+  - Side-by-side waveform visualizations
 - Saves generated audio and provides playback and visualization within the notebook.
 
 *Execute this notebook last to generate and listen to emotional music based on the trained model.*
 
+## 📁 Directory Structure
+
+```
+.
+├── data/                           # Raw DEAM data (audio + annotations)
+├── processed_data/                # Chunks and metadata
+├── latent_representations/        # EnCodec latents and metadata
+├── vae_model/                     # Trained model and visualizations
+├── notebooks/
+│   ├── preprocessing.ipynb
+│   ├── create_latent_representations.ipynb
+│   ├── train_model.ipynb
+│   └── generate_music.ipynb
+├── requirements.txt
+└── README.md
+```
+## Academic Context
+
+This project was developed as part of a **master's thesis on AI-driven music generation**, combining state-of-the-art deep learning with affective computing principles. It offers a practical implementation of emotion-conditional generative modeling in audio.
+
+## 🎧 Listen & Explore
+
+Once training is complete, you can generate musical samples representing emotional states such as:
+
+- Happy: `[1.0, 1.0]`
+- Angry: `[0.0, 1.0]`
+- Sad: `[0.0, 0.0]`
+- Calm: `[1.0, 0.0]`
+
+  
 ## Additional Notes
 - Ensure all file paths within the notebooks match your local setup.
 - Adjust configuration parameters (such as sample rates, output directories, and emotional conditions) as necessary.
