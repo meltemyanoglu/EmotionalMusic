@@ -9,6 +9,18 @@ This project demonstrates a complete pipeline for generating emotional music usi
 
 Each stage is organized into its respective Jupyter Notebook file.
 
+
+We use the **[DEAM (Database for Emotional Analysis of Music)](http://cvml.unige.ch/databases/DEAM/)** dataset, which contains 1,802 excerpts of music annotated with both:
+
+- **Static annotations**: average **valence** and **arousal** ratings for each song.
+- **Dynamic annotations**: per-second emotional evolution (useful for chunk-wise labeling).
+
+> **Citation**:
+>
+> Aljanaki, Anna, Y. Yang, and M. Soleymani. “Developing a benchmark for emotional analysis of music.” *PLOS ONE*, 2017.
+
+You must manually download the dataset from the [official DEAM site](http://cvml.unige.ch/databases/DEAM/) and place the audio and annotation files into a folder such as `data/`.
+
 ## Environment Setup
 1. Install Python 3.8+.
 2. Create a new virtual environment:
